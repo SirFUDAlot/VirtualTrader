@@ -12,6 +12,9 @@ include("includes/getstock.php");
 $stockinfo = GetStockInfo($stockcode);
 $username = $_SESSION['username'];
 
+$stock_count_query = mysql_query("SELECT quantity FROM user_stocks WHERE username='$username' AND stock='$stockcode'");
+if(mysql_num_rows($stock_count_query) == 0) { $stockcount = 0; } else { list($stockcount) = mysql_fetch_row($stock_count_query); }
+
 ?>
 <?php
 if($_POST)
@@ -29,9 +32,7 @@ if($_POST)
 		elseif(!is_numeric($quantity)) { $buymsg[] = "Buy Quantity is not a number !"; }
 		
 		if(count($buymsg) == 0)
-		{
-			$stockinfo = GetStockInfo($stockcode);
-			
+		{	
 			$balance_query = mysql_query("SELECT balance FROM user_db WHERE username='$username'");
 			list($balance) = mysql_fetch_row($balance_query);
 			
@@ -104,8 +105,6 @@ if($_POST)
 	}
 }
 
-$stock_count_query = mysql_query("SELECT quantity FROM user_stocks WHERE username='$username' AND stock='$stockcode'");
-if(mysql_num_rows($stock_count_query) == 0) { $stockcount = 0; } else { list($stockcount) = mysql_fetch_row($stock_count_query); }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">

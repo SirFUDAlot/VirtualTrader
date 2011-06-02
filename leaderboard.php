@@ -56,7 +56,7 @@ while(list($db_username, $db_balance) = mysql_fetch_row($query1))
       <td><?php echo $db_username; ?></td>
       <td>$ <?php echo $db_balance; ?></td>
       <td><?php echo $totalquantity; ?></td>
-      <td></td>
+      <td><a href="userstocks.php?username=<?php echo $db_username; ?>"><img src="images/info.png" /></a></td>
     </tr>
 <?php $i++; } ?>
   </table>

@@ -12,9 +12,6 @@ include("includes/getstock.php");
 $stockinfo = GetStockInfo($stockcode);
 $username = $_SESSION['username'];
 
-$stock_count_query = mysql_query("SELECT quantity FROM user_stocks WHERE username='$username' AND stock='$stockcode'");
-if(mysql_num_rows($stock_count_query) == 0) { $stockcount = 0; } else { list($stockcount) = mysql_fetch_row($stock_count_query); }
-
 ?>
 <?php
 if($_POST)
@@ -39,6 +36,7 @@ if($_POST)
 			list($balance) = mysql_fetch_row($balance_query);
 			
 			$totalprice = $stockinfo['price'] * $quantity;
+			$stockprice = $stockinfo['price'];
 			if($totalprice > $balance) { $buymsg[] = "Not enough money !"; }
 			else
 			{
@@ -49,12 +47,12 @@ if($_POST)
 				if($stockcount > 0)
 				{
 					$newquantity = $stockcount + $quantity;
-					$update_stock_log = mysql_query("UPDATE user_stocks SET quantity='$newquantity' WHERE username='$username' AND stock='$stockcode'");
+					$update_stock_log = mysql_query("UPDATE user_stocks SET quantity='$newquantity', price='$stockprice' WHERE username='$username' AND stock='$stockcode'");
 					$buymsg[] = "You have purchased $quantity $stockcode Stocks !";
 				}
 				else
 				{
-					$insert_stock_log = mysql_query("INSERT INTO user_stocks (username, stock, quantity) VALUES ('$username', '$stockcode', '$quantity')");
+					$insert_stock_log = mysql_query("INSERT INTO user_stocks (username, stock, quantity, price) VALUES ('$username', '$stockcode', '$quantity', '$stockprice')");
 					$buymsg[] = "You have purchased $quantity $stockcode Stocks !";
 				}
 			}
@@ -105,6 +103,9 @@ if($_POST)
 		$sellmsg[] = "Error !";
 	}
 }
+
+$stock_count_query = mysql_query("SELECT quantity FROM user_stocks WHERE username='$username' AND stock='$stockcode'");
+if(mysql_num_rows($stock_count_query) == 0) { $stockcount = 0; } else { list($stockcount) = mysql_fetch_row($stock_count_query); }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">

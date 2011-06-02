@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 31, 2011 at 10:00 PM
+-- Generation Time: Jun 02, 2011 at 08:40 PM
 -- Server version: 5.0.51
 -- PHP Version: 5.2.6-1+lenny10
 
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `stocks_available` (
   `price` varchar(20) NOT NULL,
   `diff` varchar(20) NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
 
 -- --------------------------------------------------------
 
@@ -40,10 +40,10 @@ CREATE TABLE IF NOT EXISTS `user_db` (
   `password` varchar(128) NOT NULL,
   `email` varchar(200) NOT NULL,
   `lastlogin` varchar(30) NOT NULL default 'Never',
-  `balance` varchar(1000) NOT NULL default '200',
+  `balance` double NOT NULL default '0',
   `resethash` varchar(15) NOT NULL default '0',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
 
 -- --------------------------------------------------------
 
@@ -56,6 +56,7 @@ CREATE TABLE IF NOT EXISTS `user_stocks` (
   `username` varchar(30) NOT NULL,
   `stock` varchar(30) NOT NULL,
   `quantity` int(11) NOT NULL default '0',
+  `price` varchar(10) NOT NULL default '0',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=44 ;
 

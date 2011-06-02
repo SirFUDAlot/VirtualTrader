@@ -5,7 +5,9 @@
 {
 ?>
 <li><a href="stocks.php">Stocks List</a></li>
+<li><a href="mystocks.php">My Stocks</a></li>
 <li><a href="account.php">My Account</a></li>
+<li><a href="leaderboard.php">Leaderboard</a></li>
 <li><a href="logout.php">Logout</a></li>
 <?php
 }

@@ -32,6 +32,10 @@ list($email) = mysql_fetch_row($get_email);
   Password : **********<br />
   <br />
   Email Address : <?php echo $email; ?>
+  <br />
+  <br />
+  <a href="changepass.php">Change Password</a> &gt;<br />
+  <a href="changeemail.php">Change Email Address</a> &gt;
 </div>
 </div>
 

@@ -31,7 +31,7 @@ while($i <= $totalpages)
 	$i++;
 }
 
-$query2 = "SELECT name, stock, price, diff FROM stocks_available ORDER BY id ASC LIMIT $mysqlpage, 10";
+$query2 = "SELECT name, stock, price, diff, diff_perc FROM stocks_available ORDER BY name ASC LIMIT $mysqlpage, 10";
 $query2 = mysql_query($query2);
 
 ?>
@@ -58,15 +58,15 @@ $query2 = mysql_query($query2);
 
 <h2>Stocks List</h2>
 <div class="articles"> 
-<table width="564">
+<table width="600">
 <tr>
 <td width="245">Name :</td>
 <td width="70">Code :</td>
 <td width="80">Value :</td>
-<td width="113">Difference :</td>
+<td width="150">Difference :</td>
 <td width="32">&nbsp;</td>
 </tr>
-<?php while(list($stock_name, $stock_code, $stock_price, $stock_diff) = mysql_fetch_row($query2))
+<?php while(list($stock_name, $stock_code, $stock_price, $stock_diff, $stock_diffperc) = mysql_fetch_row($query2))
 {
 ?>
 <tr>
@@ -74,7 +74,7 @@ $query2 = mysql_query($query2);
 <td><?php echo $stock_code; ?></td>
 <td><?php echo $stock_price; ?></td>
 <td><?php if(substr_count($stock_diff,'-')>0) { echo "<img src=\"images/down.png\" /> "; } else { echo "<img src=\"images/up.png\" /> "; } ?>
-<?php echo $stock_diff; ?></td>
+<?php echo $stock_diff; ?> (<?php echo $stock_diffperc; ?> %)</td>
 <td><a href="stockinfo.php?code=<?php echo $stock_code; ?>"><img src="images/info.png" alt="" width="16" height="16" border="0" /></a></td>
 </tr>
 <?php } ?>

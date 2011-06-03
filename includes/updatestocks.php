@@ -12,8 +12,9 @@ while(list($stockname, $stockcode) = mysql_fetch_row($query1))
 	$stockinfo = GetStockInfo($stockcode);
 	$stockprice = $stockinfo['price'];
 	$stockdiff = $stockinfo['diff'];
+	$stockdiff_perc = $stockinfo['diff_perc'];
 	
-	$update_query = mysql_query("UPDATE stocks_available SET price='$stockprice', diff='$stockdiff' WHERE stock='$stockcode'");	
+	$update_query = mysql_query("UPDATE stocks_available SET price='$stockprice', diff='$stockdiff', diff_perc='$stockdiff_perc' WHERE stock='$stockcode'");	
 }
 	
 	

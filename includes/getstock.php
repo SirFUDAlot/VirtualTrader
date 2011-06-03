@@ -1,24 +1,18 @@
 <?php
 
 function GetStockInfo($stockname)
-{
-	$url = "http://download.finance.yahoo.com/d/quotes.csv?s=" . $stockname . "&f=sl1d1t1c1ohgv&e=.csv";
-
-	$data = fopen($url, "r");
-
-	$content =  fgetcsv($data, 1024);
-
-	$stock_info['name'] = $content[0];
-	$stock_info['price'] = $content[1];
-	$stock_info['diff'] = $content[4];
-
-	if($content[1] === "0.00" or $content[0] === "Missing Symbols List.")
 	{
-		$stock_info['name'] = "Stock";
-		$stock_info['price'] = "Doesn't";
-		$stock_info['diff'] = "Exist";
-	}
-	
-	return $stock_info;
-}
+		$url = "http://www.google.com/ig/api?stock=" . $stockname;
+		$xml = simplexml_load_file($url);
+		$finance = $xml->xpath("/xml_api_reply/finance");
+		
+		$stockinfo['code'] = $finance[0]->symbol['data']; // Stock code name (ex: GOOG)
+		$stockinfo['name'] = $finance[0]->company['data']; // Stock Company Name (ex: Google Inc.)
+		$stockinfo['exchange'] = $finance[0]->exchange['data']; // Stock Exchange name (ex: Nasdaq)
+		$stockinfo['price'] = $finance[0]->last['data']; // Stock price
+		$stockinfo['diff'] = $finance[0]->change['data']; // Stock Difference
+		$stockinfo['diff_perc'] = $finance[0]->perc_change['data']; // Stock difference in percent
+		
+		return $stockinfo;
+    }
 ?>

@@ -133,7 +133,7 @@ if($_POST)
   Stock Code : <?php echo $stockcode; ?><br />
   Current Price : <?php echo $stockinfo['price']; ?><br />
   Current Difference : <?php if(substr_count($stockinfo['diff'],'-')>0) { echo "<img src=\"images/down.png\" /> "; } else { echo "<img src=\"images/up.png\" /> "; } ?>
-<?php echo $stockinfo['diff']; ?>
+<?php echo $stockinfo['diff']; ?> (<?php echo $stockinfo['diff_perc']; ?> %)
 <br />
 <br />
 You have <?php echo $stockcount; ?> Stocks for this company : <br />

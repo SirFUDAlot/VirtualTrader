@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 02, 2011 at 08:40 PM
+-- Generation Time: Jun 04, 2011 at 01:16 AM
 -- Server version: 5.0.51
 -- PHP Version: 5.2.6-1+lenny10
 
@@ -23,8 +23,9 @@ CREATE TABLE IF NOT EXISTS `stocks_available` (
   `id` int(11) NOT NULL auto_increment,
   `name` varchar(50) NOT NULL,
   `stock` varchar(30) NOT NULL,
-  `price` varchar(20) NOT NULL,
-  `diff` varchar(20) NOT NULL,
+  `price` varchar(20) NOT NULL default '0',
+  `diff` varchar(20) NOT NULL default '0',
+  `diff_perc` varchar(20) NOT NULL default '0',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
 
@@ -40,10 +41,10 @@ CREATE TABLE IF NOT EXISTS `user_db` (
   `password` varchar(128) NOT NULL,
   `email` varchar(200) NOT NULL,
   `lastlogin` varchar(30) NOT NULL default 'Never',
-  `balance` double NOT NULL default '0',
+  `balance` double NOT NULL default '200',
   `resethash` varchar(15) NOT NULL default '0',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
 
 -- --------------------------------------------------------
 
@@ -58,5 +59,5 @@ CREATE TABLE IF NOT EXISTS `user_stocks` (
   `quantity` int(11) NOT NULL default '0',
   `price` varchar(10) NOT NULL default '0',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=44 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=81 ;
 

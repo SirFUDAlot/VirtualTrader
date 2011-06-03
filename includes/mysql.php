@@ -1,8 +1,8 @@
 <?php
 
 $mysql_host = "localhost";
-$mysql_user = "*****";
-$mysql_pass = "*****";
+$mysql_user = "root";
+$mysql_pass = "ecandylou3";
 $mysql_db = "virtualtrader";
 
 $mysql_connect_1 = mysql_connect($mysql_host, $mysql_user, $mysql_pass);

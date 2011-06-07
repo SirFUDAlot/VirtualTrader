@@ -42,6 +42,7 @@ if($_POST)
 			else
 			{
 				$newbalance = $balance - $totalprice;
+                $newbalance = round($newbalance, 2);
 				$update_balance = mysql_query("UPDATE user_db SET balance='$newbalance' WHERE username='$username'");
 				$quantity = mysql_real_escape_string($quantity);
 				$stockcode = mysql_real_escape_string($stockcode);
@@ -50,11 +51,17 @@ if($_POST)
 					$newquantity = $stockcount + $quantity;
 					$update_stock_log = mysql_query("UPDATE user_stocks SET quantity='$newquantity', price='$stockprice' WHERE username='$username' AND stock='$stockcode'");
 					$buymsg[] = "You have purchased $quantity $stockcode Stocks !";
+					
+					include("includes/logactivity.php");
+					LogActivity($username, "+", $stockcode, $quantity, $totalprice, $newbalance);
 				}
 				else
 				{
 					$insert_stock_log = mysql_query("INSERT INTO user_stocks (username, stock, quantity, price) VALUES ('$username', '$stockcode', '$quantity', '$stockprice')");
 					$buymsg[] = "You have purchased $quantity $stockcode Stocks !";
+					
+					include("includes/logactivity.php");
+					LogActivity($username, "+", $stockcode, $quantity, $totalprice, $newbalance);
 				}
 			}
 		}
@@ -76,6 +83,7 @@ if($_POST)
 			
 			$totalprice = $stockinfo['price'] * $quantity;
 			$newbalance = $balance + $totalprice;
+            $newbalance = round($newbalance, 2);
 			
 			$stock_q_query = mysql_query("SELECT quantity FROM user_stocks WHERE username='$username' AND stock='$stockcode'");
 			list($currquantity) = mysql_fetch_row($stock_q_query);
@@ -89,11 +97,17 @@ if($_POST)
 				{
 					$delete_stock_log = mysql_query("DELETE FROM user_stocks WHERE username='$username' AND stock='$stockcode'");
 					$sellmsg[] = "You have sold $quantity $stockcode Stocks !";
+					
+					include("includes/logactivity.php");
+					LogActivity($username, "-", $stockcode, $quantity, $totalprice, $newbalance);
 				}
 				else
 				{
 					$update_stock_log = mysql_query("UPDATE user_stocks SET quantity='$newquantity' WHERE username='$username' AND stock='$stockcode'");
 					$sellmsg[] = "You have sold $quantity $stockcode Stocks !";
+					
+					include("includes/logactivity.php");
+					LogActivity($username, "-", $stockcode, $quantity, $totalprice, $newbalance);
 				}
 			}
 		}

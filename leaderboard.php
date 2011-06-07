@@ -5,7 +5,7 @@ include("includes/mysql.php");
 
 $username = $_SESSION['username'];
 
-$query1 = mysql_query("SELECT username, balance FROM user_db ORDER BY balance DESC LIMIT 0,10");
+$query1 = mysql_query("SELECT username, balance FROM user_db WHERE balance != '200' ORDER BY balance DESC LIMIT 0,10");
 
 
 ?>

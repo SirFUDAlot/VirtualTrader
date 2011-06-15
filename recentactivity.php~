@@ -6,7 +6,9 @@ include("includes/mysql.php");
 $username = $_SESSION['username'];
 $format = "Y-m-d H:i:s";
 $curr_date = date($format);
+echo $curr_date . "<br/>";
 $week_date = date($format, strtotime('-7 day' . $date));
+echo $week_date;
 
 $query1 = mysql_query("SELECT action, stock, quantity, price, date FROM activity_log WHERE username='$username' AND date >= '$week_date'");
 

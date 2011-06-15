@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 04, 2011 at 01:16 AM
+-- Generation Time: Jun 15, 2011 at 11:43 PM
 -- Server version: 5.0.51
 -- PHP Version: 5.2.6-1+lenny10
 
@@ -12,6 +12,24 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- Database: `virtualtrader`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `activity_log`
+--
+
+CREATE TABLE IF NOT EXISTS `activity_log` (
+  `id` int(11) NOT NULL auto_increment,
+  `username` varchar(30) NOT NULL,
+  `action` varchar(1) NOT NULL,
+  `stock` varchar(10) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `price` float NOT NULL,
+  `bankbalance` float NOT NULL,
+  `date` datetime NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=95 ;
 
 -- --------------------------------------------------------
 
@@ -44,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `user_db` (
   `balance` double NOT NULL default '200',
   `resethash` varchar(15) NOT NULL default '0',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=45 ;
 
 -- --------------------------------------------------------
 
@@ -59,5 +77,5 @@ CREATE TABLE IF NOT EXISTS `user_stocks` (
   `quantity` int(11) NOT NULL default '0',
   `price` varchar(10) NOT NULL default '0',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=81 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=131 ;
 

@@ -1,1 +1,10 @@
 VirtualTrader - A Web / PHP Game where users trade Realtime stocks with Virtual Money !
+
+Changelog:
+
+- Added recentactivity.php
+- New table in MySQL Database - activity_log
+- Fixed the too many digits after the decimal point in user balance bug
+- No longer showing inactive users in Leaderboard (Users with original 200 $
+- Stocks now show in Alphabetical Order
+- Moved to the Google Finance API

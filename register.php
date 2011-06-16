@@ -37,6 +37,7 @@ if($_POST)
 	{
 		$username = mysql_real_escape_string($username);
 		$username = addslashes($username);
+		$username = htmlentities($username);
 		$password = hash("SHA512", $password);
 		$email = mysql_real_escape_string($email);
 		$email = addslashes($email);

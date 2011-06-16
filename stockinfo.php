@@ -30,6 +30,8 @@ if($_POST)
 		if(strlen($quantity) == 0) { $buymsg[] = "Buy Quantity field is empty !"; }
 		elseif(strlen($quantity) > 5) { $buymsg[] = "Buy Quantity is too long !"; }
 		elseif(!is_numeric($quantity)) { $buymsg[] = "Buy Quantity is not a number !"; }
+		if($quantity == 0) { $buymsg[] = "Invalid Quantity !"; }
+		elseif($quantity < 0) { $buymsg[] = "Invalid Quantity !"; }
 		
 		if(count($buymsg) == 0)
 		{	
@@ -73,6 +75,8 @@ if($_POST)
 		if(strlen($quantity) == 0) { $sellmsg[] = "Sell Quantity field is empty !"; }
 		elseif(strlen($quantity) > 5) { $sellmsg[] = "Sell Quantity is too long !"; }
 		elseif(!is_numeric($quantity)) { $sellmsg[] = "Sell Quantity is not a number !"; }
+		if($quantity == 0) { $buymsg[] = "Invalid Quantity !"; }
+		elseif($quantity < 0) { $buymsg[] = "Invalid Quantity !"; }
 		
 		if(count($sellmsg) == 0)
 		{

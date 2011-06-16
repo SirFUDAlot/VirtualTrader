@@ -37,6 +37,8 @@ if($_POST)
 		{	
 			$balance_query = mysql_query("SELECT balance FROM user_db WHERE username='$username'");
 			list($balance) = mysql_fetch_row($balance_query);
+
+			$quantity = round($quantity);
 			
 			$totalprice = $stockinfo['price'] * $quantity;
 			$stockprice = $stockinfo['price'];
@@ -81,6 +83,8 @@ if($_POST)
 		if(count($sellmsg) == 0)
 		{
 			$stockinfo = GetStockInfo($stockcode);
+
+			$quantity = round($quantity);
 			
 			$balance_query = mysql_query("SELECT balance FROM user_db WHERE username='$username'");
 			list($balance) = mysql_fetch_row($balance_query);

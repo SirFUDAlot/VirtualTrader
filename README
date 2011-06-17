@@ -2,6 +2,7 @@ VirtualTrader - A Web / PHP Game where users trade Realtime stocks with Virtual 
 
 Changelog:
 
+- Fixed a null stock purchase bug with PHP float (Ex: float(0.7) = 0 -> You have purchased / sold 0 stocks)
 - Fixed an XSS vulnerability with Usernames (Thanks to GreenBean for finding that)
 - Disallowed the purchase / sale of 0 stocks / negative quantity of stocks (Thanks to GreenBean for finding that)
 - Decimal quantities (ex: 0.2) are now rounded up / down using php round() (Thanks to GreenBean for finding that)

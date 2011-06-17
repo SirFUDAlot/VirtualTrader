@@ -39,33 +39,36 @@ if($_POST)
 			list($balance) = mysql_fetch_row($balance_query);
 
 			$quantity = round($quantity);
-			
-			$totalprice = $stockinfo['price'] * $quantity;
-			$stockprice = $stockinfo['price'];
-			if($totalprice > $balance) { $buymsg[] = "Not enough money !"; }
+			if($quantity == 0) { $buymsg[] = "Invalid Quantity !"; }
 			else
 			{
-				$newbalance = $balance - $totalprice;
-                $newbalance = round($newbalance, 2);
-				$update_balance = mysql_query("UPDATE user_db SET balance='$newbalance' WHERE username='$username'");
-				$quantity = mysql_real_escape_string($quantity);
-				$stockcode = mysql_real_escape_string($stockcode);
-				if($stockcount > 0)
-				{
-					$newquantity = $stockcount + $quantity;
-					$update_stock_log = mysql_query("UPDATE user_stocks SET quantity='$newquantity', price='$stockprice' WHERE username='$username' AND stock='$stockcode'");
-					$buymsg[] = "You have purchased $quantity $stockcode Stocks !";
-					
-					include("includes/logactivity.php");
-					LogActivity($username, "+", $stockcode, $quantity, $totalprice, $newbalance);
-				}
+				$totalprice = $stockinfo['price'] * $quantity;
+				$stockprice = $stockinfo['price'];
+				if($totalprice > $balance) { $buymsg[] = "Not enough money !"; }
 				else
 				{
-					$insert_stock_log = mysql_query("INSERT INTO user_stocks (username, stock, quantity, price) VALUES ('$username', '$stockcode', '$quantity', '$stockprice')");
-					$buymsg[] = "You have purchased $quantity $stockcode Stocks !";
+					$newbalance = $balance - $totalprice;
+                	$newbalance = round($newbalance, 2);
+					$update_balance = mysql_query("UPDATE user_db SET balance='$newbalance' WHERE username='$username'");
+					$quantity = mysql_real_escape_string($quantity);
+					$stockcode = mysql_real_escape_string($stockcode);
+					if($stockcount > 0)
+					{
+						$newquantity = $stockcount + $quantity;
+						$update_stock_log = mysql_query("UPDATE user_stocks SET quantity='$newquantity', price='$stockprice' WHERE username='$username' AND stock='$stockcode'");
+						$buymsg[] = "You have purchased $quantity $stockcode Stocks !";
 					
-					include("includes/logactivity.php");
-					LogActivity($username, "+", $stockcode, $quantity, $totalprice, $newbalance);
+						include("includes/logactivity.php");
+						LogActivity($username, "+", $stockcode, $quantity, $totalprice, $newbalance);
+					}
+					else
+					{
+						$insert_stock_log = mysql_query("INSERT INTO user_stocks (username, stock, quantity, price) VALUES ('$username', '$stockcode', '$quantity', '$stockprice')");
+						$buymsg[] = "You have purchased $quantity $stockcode Stocks !";
+					
+						include("includes/logactivity.php");
+						LogActivity($username, "+", $stockcode, $quantity, $totalprice, $newbalance);
+					}
 				}
 			}
 		}
@@ -85,37 +88,40 @@ if($_POST)
 			$stockinfo = GetStockInfo($stockcode);
 
 			$quantity = round($quantity);
-			
-			$balance_query = mysql_query("SELECT balance FROM user_db WHERE username='$username'");
-			list($balance) = mysql_fetch_row($balance_query);
-			
-			$totalprice = $stockinfo['price'] * $quantity;
-			$newbalance = $balance + $totalprice;
-            $newbalance = round($newbalance, 2);
-			
-			$stock_q_query = mysql_query("SELECT quantity FROM user_stocks WHERE username='$username' AND stock='$stockcode'");
-			list($currquantity) = mysql_fetch_row($stock_q_query);
-			
-			if($quantity <= $currquantity)
+			if($quantity == 0) { $sellmsg[] = "Invalid Quantity !"; }
+			else
 			{
-				$stockcode = mysql_real_escape_string($stockcode);
-				$newquantity = $currquantity - $quantity;
-				$update_balance_query = mysql_query("UPDATE user_db SET balance='$newbalance' WHERE username='$username'");
-				if($newquantity == 0)
+				$balance_query = mysql_query("SELECT balance FROM user_db WHERE username='$username'");
+				list($balance) = mysql_fetch_row($balance_query);
+			
+				$totalprice = $stockinfo['price'] * $quantity;
+				$newbalance = $balance + $totalprice;
+            	$newbalance = round($newbalance, 2);
+			
+				$stock_q_query = mysql_query("SELECT quantity FROM user_stocks WHERE username='$username' AND stock='$stockcode'");
+				list($currquantity) = mysql_fetch_row($stock_q_query);
+			
+				if($quantity <= $currquantity)
 				{
-					$delete_stock_log = mysql_query("DELETE FROM user_stocks WHERE username='$username' AND stock='$stockcode'");
-					$sellmsg[] = "You have sold $quantity $stockcode Stocks !";
+					$stockcode = mysql_real_escape_string($stockcode);
+					$newquantity = $currquantity - $quantity;
+					$update_balance_query = mysql_query("UPDATE user_db SET balance='$newbalance' WHERE username='$username'");
+					if($newquantity == 0)
+					{
+						$delete_stock_log = mysql_query("DELETE FROM user_stocks WHERE username='$username' AND stock='$stockcode'");
+						$sellmsg[] = "You have sold $quantity $stockcode Stocks !";
 					
-					include("includes/logactivity.php");
-					LogActivity($username, "-", $stockcode, $quantity, $totalprice, $newbalance);
-				}
-				else
-				{
-					$update_stock_log = mysql_query("UPDATE user_stocks SET quantity='$newquantity' WHERE username='$username' AND stock='$stockcode'");
-					$sellmsg[] = "You have sold $quantity $stockcode Stocks !";
+						include("includes/logactivity.php");
+						LogActivity($username, "-", $stockcode, $quantity, $totalprice, $newbalance);
+					}
+					else
+					{
+						$update_stock_log = mysql_query("UPDATE user_stocks SET quantity='$newquantity' WHERE username='$username' AND stock='$stockcode'");
+						$sellmsg[] = "You have sold $quantity $stockcode Stocks !";
 					
-					include("includes/logactivity.php");
-					LogActivity($username, "-", $stockcode, $quantity, $totalprice, $newbalance);
+						include("includes/logactivity.php");
+						LogActivity($username, "-", $stockcode, $quantity, $totalprice, $newbalance);
+					}
 				}
 			}
 		}

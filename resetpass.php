@@ -22,15 +22,13 @@ if($_GET)
 	$hash = $_GET['hash'];
 	
 	if(strlen($hash) == 0) { $msg[] = "Hash Field is empty !"; }
-	elseif(strlen($hash) > 15) { $msg[] = "Hash is invalid !"; }
-	elseif(strlen($hash) < 15) { $msg[] = "Hash is invalid !"; }
-	
-	echo strlen($hash);
+	elseif(strlen($hash) > 16) { $msg[] = "Hash is invalid !"; }
+	elseif(strlen($hash) < 14) { $msg[] = "Hash is invalid !"; }
 	
 	if(count($msg) == 0)
 	{
 		$hash = mysql_real_escape_string($hash);
-		$query = mysql_query("SELECT username, email FROM user_db WHERE resethash='$resethash'");
+		$query = mysql_query("SELECT username, email FROM user_db WHERE resethash='$hash'");
 		if(mysql_num_rows($query) == 0) { $msg[] = "Hash is incorrect !"; }
 		else 
 		{

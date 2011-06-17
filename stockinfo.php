@@ -39,7 +39,7 @@ if($_POST)
 			list($balance) = mysql_fetch_row($balance_query);
 
 			$quantity = round($quantity);
-			if($quantity == 0) { $buymsg[] = "Invalid Quantity !"; }
+			if($quantity < 1) { $buymsg[] = "Invalid Quantity !"; }
 			else
 			{
 				$totalprice = $stockinfo['price'] * $quantity;
@@ -88,7 +88,7 @@ if($_POST)
 			$stockinfo = GetStockInfo($stockcode);
 
 			$quantity = round($quantity);
-			if($quantity == 0) { $sellmsg[] = "Invalid Quantity !"; }
+			if($quantity < 1) { $sellmsg[] = "Invalid Quantity !"; }
 			else
 			{
 				$balance_query = mysql_query("SELECT balance FROM user_db WHERE username='$username'");

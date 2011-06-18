@@ -4,15 +4,21 @@ session_start();
 
 if($_SESSION['loggedin'] === "true") { header("Location: index.php"); exit; }
 
-function genRandomString($length) {
-   $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUXWXYZabcdefghijklmnopqrstuvwxyz';
-   $string = "";    
-
-   for ($p = 0; $p < $length; $p++) {
-   	$string .= $characters[mt_rand(0, strlen($characters))];
-   }
-
-   return $string;
+function genRandomString($length = 15) {
+ 
+        $validCharacters = "abcdefghijklmnopqrstuxyvwzABCDEFGHIJKLMNOPQRSTUXYVWZ";
+        $validCharNumber = strlen($validCharacters);
+ 
+        $result = "";
+ 
+        for ($i = 0; $i < $length; $i++)
+        {
+                $index = mt_rand(0, $validCharNumber - 1);
+                $result .= $validCharacters[$index];
+        }
+ 
+    return $result;
+ 
 }
 
 if($_GET)
@@ -22,8 +28,8 @@ if($_GET)
 	$hash = $_GET['hash'];
 	
 	if(strlen($hash) == 0) { $msg[] = "Hash Field is empty !"; }
-	elseif(strlen($hash) > 16) { $msg[] = "Hash is invalid !"; }
-	elseif(strlen($hash) < 14) { $msg[] = "Hash is invalid !"; }
+	elseif(strlen($hash) > 15) { $msg[] = "Hash is invalid !"; }
+	elseif(strlen($hash) < 15) { $msg[] = "Hash is invalid !"; }
 	
 	if(count($msg) == 0)
 	{
@@ -33,7 +39,7 @@ if($_GET)
 		else 
 		{
 			list($username, $email) = mysql_fetch_row($query);
-			$newpass = genRandomString(10);
+			$newpass = genRandomString();
 			$enc_newpass = hash("SHA512", $newpass);
 			$query2 = mysql_query("UPDATE user_db SET password='$enc_newpass', resethash='0' WHERE username='$username'");
 			
@@ -80,7 +86,7 @@ if($_POST)
 			list($username, $curr_resethash) = mysql_fetch_row($query1);
 			if($curr_resethash == '0')
 			{
-				$resethash = genRandomString(15);
+				$resethash = genRandomString();
 
 				$insert_query = mysql_query("UPDATE user_db SET resethash='$resethash' WHERE username='$username'");				
 				

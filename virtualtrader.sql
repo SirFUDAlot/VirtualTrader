@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 15, 2011 at 11:43 PM
+-- Generation Time: Jun 19, 2011 at 10:13 PM
 -- Server version: 5.0.51
 -- PHP Version: 5.2.6-1+lenny10
 
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `activity_log` (
   `bankbalance` float NOT NULL,
   `date` datetime NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=95 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=213 ;
 
 -- --------------------------------------------------------
 
@@ -61,8 +61,9 @@ CREATE TABLE IF NOT EXISTS `user_db` (
   `lastlogin` varchar(30) NOT NULL default 'Never',
   `balance` double NOT NULL default '200',
   `resethash` varchar(15) NOT NULL default '0',
+  `resetdate` datetime NOT NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=45 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=62 ;
 
 -- --------------------------------------------------------
 
@@ -77,5 +78,5 @@ CREATE TABLE IF NOT EXISTS `user_stocks` (
   `quantity` int(11) NOT NULL default '0',
   `price` varchar(10) NOT NULL default '0',
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=131 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=194 ;
 

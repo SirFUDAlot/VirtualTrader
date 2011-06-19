@@ -27,7 +27,7 @@ while(list($stockname, $stockcode) = mysql_fetch_row($stock_query))
 // Remove expired reset hashes (Over 24 hours old)
 // ---------------------------------------
 
-$query = mysql_query("SELECT username, resetdate FROM user_db WHERE resethash != '0'");
+$hash_query = mysql_query("SELECT username, resetdate FROM user_db WHERE resethash != '0'");
 
 while(list($username, $resetdate) = mysql_fetch_row($hash_query))
 {

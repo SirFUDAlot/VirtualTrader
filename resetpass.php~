@@ -87,17 +87,15 @@ if($_POST)
 			if($curr_resethash == '0')
 			{
 				$resethash = genRandomString();
-				$resetdate = date("Y-m-d H:i:s");
 
-				$insert_query = mysql_query("UPDATE user_db SET resethash='$resethash', resetdate='$resetdate' WHERE username='$username'");				
+				$insert_query = mysql_query("UPDATE user_db SET resethash='$resethash' WHERE username='$username'");				
 				
 				$to = $email;
 				$subject = "VirtualTrader - Password Reset Request";
 				$message = "Hello $username\n\n";
 				$message .= "You requested a password reset for your account at the VirtualTrader Website\n\n";
 				$message .= "Please go to the following link to continue with this process :\n\n";
-				$message .= "http://virtualtrader.cuonic.tk/resetpass.php?hash=$resethash\n\n";
-				$message .= "Warning: This reset hash will expire within 24 hours !";
+				$message .= "http://virtualtrader.cuonic.tk/resetpass.php?hash=$resethash";
 				$headers = "From: no-reply@virtualtrader.cuonic.tk";
 						
 				mail($to, $subject, $message, $headers);
@@ -114,8 +112,7 @@ if($_POST)
 				$message = "Hello $username\n\n";
 				$message .= "You requested a password reset for your account at the VirtualTrader Website\n\n";
 				$message .= "Please go to the following link to continue with this process :\n\n";
-				$message .= "http://virtualtrader.cuonic.tk/resetpass.php?hash=$curr_resethash\n\n";
-				$message .= "Warning: This reset hash will expire within 24 hours !";
+				$message .= "http://virtualtrader.cuonic.tk/resetpass.php?hash=$curr_resethash";
 				$headers = "From: no-reply@virtualtrader.cuonic.tk";
 						
 				mail($to, $subject, $message, $headers);

@@ -1,7 +1,12 @@
+--------------------------------------------------------------------------------------
 VirtualTrader - A Web / PHP Game where users trade Realtime stocks with Virtual Money !
+--------------------------------------------------------------------------------------
 
 Changelog:
+=========
 
+- resetpass.php modified to add reset hash expiry functionality. The reset hash expires after 24 hours via cron job
+- updatestocks.php became cron.php, the sitewide cron job handler... It now handles reset hash expiry (over 24 hours) and updates stocks DB
 - Fixed Random String generator
 - Fixed Reset Password Hash error
 - Fixed a null stock purchase bug with PHP float (Ex: float(0.7) = 0 -> You have purchased / sold 0 stocks)
@@ -14,3 +19,16 @@ Changelog:
 - No longer showing inactive users in Leaderboard (Users with original 200 $
 - Stocks now show in Alphabetical Order
 - Moved to the Google Finance API
+
+Cron Job Info :
+==============
+
+The /includes/cron.php script should be run every 5 minutes to update the stocks database, and also expire reset hashes over 24 hours old.
+On a linux system, you an add a cron job by using crontab -e via SSH terminal
+
+Once inside the Crontab editor, add the following line :
+
+5 * * * * /usr/bin/php /LOCATION/TO/VIRTUALTRADER/includes/cron.php >/dev/null 2>&1
+
+
+

@@ -5,6 +5,9 @@ VirtualTrader - A Web / PHP Game where users trade Realtime stocks with Virtual 
 Changelog:
 =========
 
+- Cron script can only be executed by local system to reduce server load
+- Email activation sytem in place. User cannot login without having activated his / her account
+- Added search functionality, placed search form in main menu. CSS still needs tweaking
 - resetpass.php modified to add reset hash expiry functionality. The reset hash expires after 24 hours via cron job
 - updatestocks.php became cron.php, the sitewide cron job handler... It now handles reset hash expiry (over 24 hours) and updates stocks DB
 - Fixed Random String generator

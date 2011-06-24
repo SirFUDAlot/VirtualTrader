@@ -37,14 +37,24 @@ if($_POST)
 			list($db_password, $db_lastlogin) = mysql_fetch_row($query1);
 			if($password === $db_password)
 			{
-				$_SESSION['loggedin'] = "true";
-				$_SESSION['username'] = $username;
-				$_SESSION['lastlogin'] = $db_lastlogin;
+				$query = mysql_query("SELECT active FROM user_db WHERE username='$username'");
+				list($active) = mysql_fetch_row($query);
 				
-				$query2 = mysql_query("UPDATE user_db SET lastlogin='$curr_date' WHERE username='$username'");
+				if($active == 1)
+				{
+					$_SESSION['loggedin'] = "true";
+					$_SESSION['username'] = $username;
+					$_SESSION['lastlogin'] = $db_lastlogin;
 				
-				header("Location: index.php");
-				exit;
+					$query2 = mysql_query("UPDATE user_db SET lastlogin='$curr_date' WHERE username='$username'");
+				
+					header("Location: index.php");
+					exit;
+				}
+				else
+				{
+					$msg[] = "Account is not active !";
+				}
 			}
 			else
 			{

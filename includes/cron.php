@@ -4,6 +4,11 @@
 
 set_time_limit(0);
 
+if($_SERVER[REMOTE_ADDR]!=$_SERVER[SERVER_ADDR]) {
+    echo "Local access only.";
+    exit;
+}
+
 include("mysql.php");
 include("getstock.php");
 

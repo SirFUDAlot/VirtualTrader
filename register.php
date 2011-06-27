@@ -193,7 +193,7 @@ if ($_POST) {
                     </table>
                 </form>
                 <?php } else {
-                echo "<div class=\"msg\">$msg</div><br/>";
+                echo "<div class=\"errormsg\">$msg</div><br/>";
             } ""?>
 
             </div>

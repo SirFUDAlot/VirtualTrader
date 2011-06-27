@@ -2,6 +2,8 @@
 
 session_start();
 
+$msg = array();
+
 if ($_SESSION['loggedin'] === "true") {
     header("Location: index.php");
     exit;
@@ -121,11 +123,11 @@ if ($_POST) {
     $active = $row->active;
     if ($active == 0 && $result > 0) {
         mysql_query("UPDATE user_db SET active='1' WHERE `username`='$username' AND `activationKey`='$activationKey' AND `active`='0'") or die(mysql_error());
-        $msg[] = "Your account has been activated!";
+        $msg = "Your account has been activated!";
     } else if ($active == 1 && $result > 0) {
-        $msg[] = "Account is already active!";
+        $msg = "Account is already active!";
     } else {
-        $msg[] = "Invalid activation code!";
+        $msg = "Invalid activation code!";
     }
 }
 

@@ -83,7 +83,7 @@ if ($_POST) {
             $msg_from = "no-reply@virtualtrader.cuonic.tk";
             $msg_subj = "VirtualTrader - New Account Created";
             $message =
-                    'Hello !
+                    "Hello !
                         <br><br>
                         You have created a new account at VirtualTrader.cuoinic.tk
                         <br>
@@ -95,13 +95,13 @@ if ($_POST) {
                         <br><br>
                         Please click this link to activate your account:
                         <br>
-                        <a href="http://virtualtrader.cuonic.tk/register.php?key=' . $activationKey . '&username=' . $username . '">http://virtualtrader.cuonic.tk/register.php?key=' . $activationKey . '&username=' . $username . '</a>
+                        <a href=\"http://virtualtrader.cuonic.tk/register.php?key=' . $activationKey . '&username=' . $username . '\">http://virtualtrader.cuonic.tk/register.php?key=' . $activationKey . '&username=' . $username . '</a>
                         <br><br>
                         Regards,
                         <br>
                         VirtualTrader Team
-            ';
-            $msg_head = 'From: $msg_from' . "\r\n";
+            ";
+            $msg_head = "From: $msg_from" . "\r\n";
             $msg_head .= 'MIME-Version: 1.0' . "\r\n";
             $msg_head .= 'Content-type: text/html;' . "\r\n";
             mail($email, $msg_subj, $message, $msg_head);

@@ -95,7 +95,7 @@ if ($_POST) {
                         <br><br>
                         Please click this link to activate your account:
                         <br>
-                        <a href=\"http://virtualtrader.cuonic.tk/register.php?key=' . $activationKey . '&username=' . $username . '\">http://virtualtrader.cuonic.tk/register.php?key=' . $activationKey . '&username=' . $username . '</a>
+                        <a href=\"http://virtualtrader.cuonic.tk/register.php?key=$activationKey&username=$username\">http://virtualtrader.cuonic.tk/register.php?key=$activationKey&username=$username</a>
                         <br><br>
                         Regards,
                         <br>

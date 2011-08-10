@@ -85,17 +85,17 @@ if ($_POST) {
             $message =
                     "Hello !
                         <br><br>
-                        You have created a new account at VirtualTrader.cuoinic.tk
+                        You have created a new account at VirtualTrader.cuonic.tk
                         <br>
                         Here is a reminder of your account information :
                         <br><br>
-                        Username : ' . $username . '
+                        Username : {$username}
                         <br>
-                        Password : ' . $verifypassword . '
+                        Password : {$verifypassword}
                         <br><br>
-                        Please click this link to activate your account:
+                        Please click the following link to activate your account:
                         <br>
-                        <a href=\"http://virtualtrader.cuonic.tk/register.php?key=$activationKey&username=$username\">http://virtualtrader.cuonic.tk/register.php?key=$activationKey&username=$username</a>
+                        <a href=\"http://virtualtrader.cuonic.tk/register.php?key={$activationKey}&username={$username}\">http://virtualtrader.cuonic.tk/register.php?key={$activationKey}&username={$username}</a>
                         <br><br>
                         Regards,
                         <br>

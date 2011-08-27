@@ -7,12 +7,16 @@ $title = "Virtual Trader";
 $lang = "en"; //Site language - only en atm.
 $results = 10; //Results per page
 
+$mysql_host = "localhost";	 	
+$mysql_user = "*****";	 	
+$mysql_pass = "*****";	 	
+$mysql_db = "virtualtrader";
 /*
 MySQL Settings!
 */
 
-mysql_connect("localhost", "Username", "Password") or die("Error! - Failed connecting to MySQL Server.");
-mysql_select_db("Database") or die("Error! - Failed selecting MySQL Database.");
+mysql_connect($mysql_host, $mysql_user, $mysql_pass) or die("Error! - Failed connecting to MySQL Server.");
+mysql_select_db($mysql_db) or die("Error! - Failed selecting MySQL Database.");
 
 session_start();
 
